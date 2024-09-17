@@ -1,0 +1,32 @@
+<div class="col-lg-8 col-12 mt-3 mx-auto">
+    @foreach($topics as $topic)
+        <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
+            </div>
+    @endforeach
+
+    <div class="col-lg-12 col-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mb-0">
+                <li class="page-item   
+ {{ $topics->currentPage() == 1 ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $topics->previousPageUrl() }}" aria-label="Previous">
+                        <span aria-hidden="true">Prev</span>
+                    </a>
+                </li>
+
+                @for ($i = 1; $i <= $topics->lastPage(); $i++)
+                    <li class="page-item {{ $i == $topics->currentPage() ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $topics->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endfor
+
+                <li class="page-item {{ $topics->currentPage() == $topics->lastPage() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $topics->nextPageUrl()   
+ }}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
