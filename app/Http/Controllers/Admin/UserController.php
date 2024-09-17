@@ -39,10 +39,11 @@ class UserController extends Controller
             'email' => 'required|email', 
             'password' => 'required|confirmed', 
         ]);
-        $data['password'] = Hash::make(Str::password(30));
-        $data['active'] = isset($request->active) ? 0 : 1;  //default is one if i has request =0 and it will never happen here
+        $data['password'] = Hash::make($request->password);
         $data['email_verified_at'] = now(); 
+        $data['active'] = 1;
         User::create($data);
+       //dd($request);
         return redirect()->route('users.index');
     } 
 
@@ -76,7 +77,7 @@ class UserController extends Controller
             'password' => 'nullable|confirmed'
         ]);
         //dd($data);
-        $data['password'] = Hash::make(Str::password(30));
+        $data['password'] = Hash::make($request->password);
         $data['active'] = isset($request->active) ;  
         User::where('id',$id)->update($data); 
         return redirect()->route('users.index');

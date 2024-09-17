@@ -24,11 +24,11 @@
                       <img class="img-md rounded-circle" src="{{asset('assets/admin/images/avatar-default.svg')}}" alt="Profile image"
                         width="80" height="80" />
                       <p class="mb-1 mt-3 font-weight-semibold">  
-                        @if(auth()->check())
+                         @if(auth()->check())
                         {{ auth()->user()->userName }}
                          @else
                          Guest
-                        @endif
+                        @endif 
                       </p>
                       <p class="fw-light text-muted mb-0">
                          @if(auth()->check())

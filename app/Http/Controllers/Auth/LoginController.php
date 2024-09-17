@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request; 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -51,19 +52,16 @@ class LoginController extends Controller
         
     ]);
     // Attempt to login the user
-    if (auth()->attempt(['userName' => $request->userName,
-        'password' => $request->password]) && auth()->user()->active === 1) {
-
-        // Store user information in session for easy access in other views
-        //session()->put('loggedUser', auth()->user());
-
-        // Redirect to the intended page or the home dashboard
-        return redirect()->intended('/home');
+    if (auth()->attempt(['userName' => $request->userName, 'password' => $request->password])) {
+        if (auth()->user()->active === 1) {
+            session()->put('loggedUser', auth()->user());
+            return redirect()->intended('/home');
+        } else {
+            auth()->logout(); // Log out if not active
+            return redirect()->back()->withErrors(['error' => 'Your account is not active.']);
+        }
+    } else {
+        return redirect()->back()->withErrors(['error' => 'Invalid username or password.']);
     }
-
-    return back()->withErrors(['login_failed' => 'Invalid username or password']);
 }
 }
-
-
-

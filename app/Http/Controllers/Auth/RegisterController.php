@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -54,6 +55,7 @@ class RegisterController extends Controller
             'userName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], 
+            
         ]);
     }
 
@@ -75,7 +77,7 @@ class RegisterController extends Controller
             //'active' => $data['active'],
         ]);  
         $user->save();
-        //session()->put('registeredUser', $user);
+        session()->put('registeredUser', $user);
 
     return redirect()->route('email.verification');
     }
@@ -84,14 +86,13 @@ class RegisterController extends Controller
     {
 
     // If email verification is successful, update the user's status
-    $user = User::findOrFail(id);
+    $user = User::findOrFail(session('registeredUser')->id);
     $user->active = 1;
     $user->save();
 
     // Store user information in session for permanent access
-    //session()->put('loggedUser', $user);
+    session()->put('loggedUser', $user);
 
     return redirect()->intended('/home');
 }
 }
-        
