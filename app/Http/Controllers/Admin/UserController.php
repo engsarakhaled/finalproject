@@ -40,7 +40,7 @@ class UserController extends Controller
             'password' => 'required|confirmed', 
         ]);
         $data['password'] = Hash::make(Str::password(30));
-        $data['active'] = isset($request->active) ? 0 : 1;  //default is one if i has request =0 and it will never have here
+        $data['active'] = isset($request->active) ? 0 : 1;  //default is one if i has request =0 and it will never happen here
         $data['email_verified_at'] = now(); 
         User::create($data);
         return redirect()->route('users.index');
