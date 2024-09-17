@@ -55,7 +55,7 @@ class LoginController extends Controller
         'password' => $request->password]) && auth()->user()->active === 1) {
 
         // Store user information in session for easy access in other views
-        session()->put('loggedUser', auth()->user());
+        //session()->put('loggedUser', auth()->user());
 
         // Redirect to the intended page or the home dashboard
         return redirect()->intended('/home');

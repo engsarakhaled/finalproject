@@ -75,7 +75,7 @@ class RegisterController extends Controller
             //'active' => $data['active'],
         ]);  
         $user->save();
-        session()->put('registeredUser', $user);
+        //session()->put('registeredUser', $user);
 
     return redirect()->route('email.verification');
     }
@@ -84,12 +84,12 @@ class RegisterController extends Controller
     {
 
     // If email verification is successful, update the user's status
-    $user = User::findOrFail(session('registeredUser')->id);
+    $user = User::findOrFail(id);
     $user->active = 1;
     $user->save();
 
     // Store user information in session for permanent access
-    session()->put('loggedUser', $user);
+    //session()->put('loggedUser', $user);
 
     return redirect()->intended('/home');
 }
