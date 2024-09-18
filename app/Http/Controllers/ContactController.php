@@ -59,11 +59,9 @@ class ContactController extends Controller
         $readMessage = new ReadMessage();
         $readMessage->contact_id = $id;
         $readMessage->save();
-    }
-
+        }
     // Return the view with the updated read message status
     return view('admin.message_details', compact('unreadMessage', 'readMessage'));
-
     }
 
      // in the blade i made relation 1 -> 1 between contact_id of read messages and id of contact table to make the use more easy 

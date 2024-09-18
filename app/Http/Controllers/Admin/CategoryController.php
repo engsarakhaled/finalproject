@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Topic;
 class CategoryController extends Controller
 {
     /**
@@ -72,7 +73,16 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        Category::where('id',$id)->delete();
-        return redirect()->route('categories.index');
+        // Check if the category has any associated topics
+        $hasTopics = Topic::where('category_id', $id)->exists();
+    
+        if ($hasTopics) {
+            // If the category has topics, return a response indicating that it cannot be deleted
+            return redirect()->back()->with('error', 'Cannot delete a category with associated topics.');
+        } else {
+            // If the category has no topics, delete it
+            Category::where('id', $id)->delete();
+            return redirect()->route('categories.index');
+        }
     }
 }

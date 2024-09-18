@@ -19,7 +19,7 @@ class PublicController extends Controller
     {
         $testimonials = Testimonial::where('published', 1)  
         ->latest()
-        ->take(3)
+        ->limit(3)
         ->get();
         $topics= Topic::where('published', 1)
         ->orderBy('no_of_views', 'desc')
@@ -62,7 +62,7 @@ class PublicController extends Controller
         $topic= Topic::where('published',1 )  
         ->where('trending', 1)    
         ->latest()
-        ->take(2)
+        ->limit(2)
         ->get();   
         if (count($topic) >= 2) {
             $topic1 = $topic[0];
