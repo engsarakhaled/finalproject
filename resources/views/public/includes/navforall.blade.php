@@ -15,19 +15,19 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                <li class="nav-item">
+                <li class="nav-item{{ Request::routeIs('index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('index')}}">Home</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item{{ Request::routeIs('topicslisting') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('topicslisting')}}">Topics Listing</a>
                 </li>
 
-                <li class="nav-item">  
+                <li class="nav-item{{ Request::routeIs('contact') ? 'active' : '' }}">  
                     <a class="nav-link" href="{{route('contact')}}">Contact Us</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item{{ Request::routeIs('testimonials') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('testimonials')}}">Our Client Says</a>
                 </li>
             </ul>

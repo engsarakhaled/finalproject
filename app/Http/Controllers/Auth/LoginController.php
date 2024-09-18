@@ -43,25 +43,25 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
-    public function login(Request $request)
-    {
-        //dd($request);
-    $this->validate($request, [
-        'userName' => 'required|string|max:255',
-        'password' => 'required|string',
-        
-    ]);
-    // Attempt to login the user
-    if (auth()->attempt(['userName' => $request->userName, 'password' => $request->password])) {
-        if (auth()->user()->active === 1) {
-            session()->put('loggedUser', auth()->user());
-            return redirect()->intended('/home');
-        } else {
-            auth()->logout(); // Log out if not active
-            return redirect()->back()->withErrors(['error' => 'Your account is not active.']);
-        }
-    } else {
-        return redirect()->back()->withErrors(['error' => 'Invalid username or password.']);
-    }
-}
-}
+     public function login(Request $request)
+     {
+         //dd($request);
+     $this->validate($request, [
+         'userName' => 'required|string|max:255',
+         'password' => 'required|string',
+         
+     ]);
+     // Attempt to login the user
+     if (auth()->attempt(['userName' => $request->userName, 'password' => $request->password])) {
+         if (auth()->user()->active === 1) {
+             session()->put('loggedUser', auth()->user());
+             return redirect()->intended('/home');
+         } else {
+             auth()->logout(); // Log out if not active
+             return redirect()->back()->withErrors(['error' => 'Your account is not active.']);
+         }
+     } else {
+         return redirect()->back()->withErrors(['error' => 'Invalid username or password.']);
+     }
+ }
+ }
