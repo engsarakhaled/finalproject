@@ -22,8 +22,8 @@ class TopicFactory extends Factory
              'content'=>fake()->text(),
              'published'=>fake()->boolean(),
              'trending'=>fake()->boolean(),
-             'category_id'=>fake()->numberBetween(1,10),
-             'no_of_views'=>fake()->numberBetween(1,100),
+             'category_id'=>fake()->numberBetween(1,10),//depends on the id in my database 
+             'no_of_views'=>fake()->numberBetween(1,1000),
         ];
     }
 }
