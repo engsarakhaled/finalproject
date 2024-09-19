@@ -67,7 +67,7 @@ class LoginController extends Controller
         }
         } else {
         // Invalid credentials
-          dd($user);
+          //dd($user);
         return redirect()->back()->withErrors(['error' => 'Invalid username or password.']);
            }
     }
