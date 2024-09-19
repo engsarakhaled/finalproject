@@ -58,7 +58,7 @@ class ContactController extends Controller
     if (!$readMessage) {
         $readMessage = new ReadMessage();
         $readMessage->contact_id = $id;
-        $readMessage->save() && $unreadMessage->kill();
+        $readMessage->save() ;
         }
     // Return the view with the updated read message status
     return view('admin.message_details', compact('unreadMessage', 'readMessage'));
