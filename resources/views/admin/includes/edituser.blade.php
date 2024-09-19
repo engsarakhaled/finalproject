@@ -41,7 +41,7 @@
         <div class="form-group mb-3 row">
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Password:</label>
           <div class="col-md-10">
-            <input type="password" placeholder="Password" class="form-control py-2" name="password"  />
+            <input type="password" placeholder="Password" class="form-control py-2" name="password" value="{{old('password')}}"  />
             @error('password')
             <div class="alert alert-warning">{{ $message }}</div>
            @enderror
@@ -50,7 +50,7 @@
         <div class="form-group mb-3 row">
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Confirm Password:</label>
           <div class="col-md-10">
-            <input type="password" placeholder="Confirm Password" class="form-control py-2" name="password_confirmation" />
+            <input type="password" placeholder="Confirm Password" class="form-control py-2" name="password_confirmation" value="{{old('password_confirmation')}}"/>
             @error('password_confirmation')
             <div class="alert alert-warning">{{ $message }}</div>
            @enderror
@@ -60,7 +60,7 @@
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Active:</label>
           <input type="hidden"  value="0"/>
           <div class="col-md-10">
-            <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="active" @checked(old('active',$users->active)) />
+            <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="active" @checked($users->active) />
           </div>
         </div>
         <div class="text-md-end">

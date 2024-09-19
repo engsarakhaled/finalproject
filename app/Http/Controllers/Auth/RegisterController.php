@@ -76,23 +76,23 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),  
             //'active' => $data['active'],
         ]);  
-        $user->save();
-        session()->put('registeredUser', $user);
+       // $user->save();
+        //session()->put('registeredUser', $user);
 
-    return redirect()->route('email.verification');
+    //return redirect()->route('email.verification');
     }
 
-    public function emailVerification(Request $request)
-    {
+   // public function emailVerification(Request $request)
+    //{
 
     // If email verification is successful, update the user's status
-    $user = User::findOrFail(session('registeredUser')->id);
-    $user->active = 1;
-    $user->save();
+    //$user = User::findOrFail(session('registeredUser')->id);
+    //$user->active = 1;
+    //$user->save();
 
     // Store user information in session for permanent access
-    session()->put('loggedUser', $user);
+    //session()->put('loggedUser', $user);
 
-    return redirect()->intended('/home');
-}
+   // return redirect()->intended('/home');
+//}
 }
