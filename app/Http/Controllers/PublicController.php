@@ -45,7 +45,7 @@ class PublicController extends Controller
 
      public function topicdetail(string $id)
     {
-         $topic = Topic::with('category')->findOrFail($id); 
+         $topic = Topic::with('category')->where('published', 1)->findOrFail($id); 
          return view('public.topics-detail',compact('topic'));      
     }
 
