@@ -11,12 +11,11 @@ class ContactController extends Controller
 {
 
     public function index()
-    {
-        $messages = Contact::with('ReadMessage')->get();
-         $readMessages = ReadMessage::get();
-        return view('admin.messages', compact('messages','readMessages'));
-    }
-
+   {
+    $messages = Contact::all(); // Unread messages
+    $readMessages = ReadMessage::with('contact')->get(); // Read messages
+    return view('admin.messages', compact('messages', 'readMessages'));
+   }
     public function send(Request $request){
 
         $data = $request->validate([
@@ -50,7 +49,6 @@ class ContactController extends Controller
     {
         // Fetch the unread message
     $unreadMessage = Contact::findOrFail($id);
-
     // Check if the message has already been marked as read
     $readMessage = ReadMessage::where('contact_id', $id)->first();
 
@@ -58,7 +56,8 @@ class ContactController extends Controller
     if (!$readMessage) {
         $readMessage = new ReadMessage();
         $readMessage->contact_id = $id;
-        $readMessage->save() ;
+        $readMessage->save();
+        dd($readMessage);
         }
     // Return the view with the updated read message status
     return view('admin.message_details', compact('unreadMessage', 'readMessage'));

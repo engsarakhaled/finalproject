@@ -17,10 +17,12 @@ class PublicController extends Controller
 
     public function index()
     {
+        //testimonial part
         $testimonials = Testimonial::where('published', 1)  
         ->latest()
         ->limit(3)
         ->get();
+        //featured topic part
         $topics= Topic::where('published', 1)
         ->orderBy('no_of_views', 'desc')
         ->take(2)
@@ -33,6 +35,7 @@ class PublicController extends Controller
             $topic1 = $topics[0];
             $topic2 = $topics[0];
         }
+        //browse topic part
         $categories = Category::with([
             'topics'=>function($query){$query
             ->where('published',1)
@@ -45,7 +48,9 @@ class PublicController extends Controller
 
      public function topicdetail(string $id)
     {
-         $topic = Topic::with('category')->where('published', 1)->findOrFail($id); 
+         $topic = Topic::with('category')
+         ->where('published', 1)
+         ->findOrFail($id); 
          return view('public.topics-detail',compact('topic'));      
     }
 
