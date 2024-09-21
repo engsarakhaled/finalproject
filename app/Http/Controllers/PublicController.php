@@ -86,7 +86,7 @@ class PublicController extends Controller
               
     public function testimonial()
     {
-        $testimonials = Testimonial::where('published', 1)->get();
+        $testimonials = Testimonial::where('published', 1) ->latest()->get();
         return view('public.testimonials', compact('testimonials'));
     }
 }
