@@ -5,22 +5,27 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\User;
 
-class CheckActive
-{
+class CheckActive {
+
+
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle (Request $request, Closure $next):
+    Response
     {
-        if (auth()->check() && auth()->user()->active === 1) {
-            // User is already logged in and active, continue to the next middleware
-            return $next($request);
-        } else {
-          //  auth()->logout();
-            return redirect()->back()->withErrors(['error' => 'Your account is not active.']);
-                }
+      //  $user = $request->user(); // Retrieve the authenticated user
+
+       // if (!$user->active==1) {
+       //     return redirect()->back()->with('error', 'You must be active to access this page.');
+       // }
+
+      //  return $next($request);
     }
 }
